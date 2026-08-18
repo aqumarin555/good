@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>한모금 | 성남 주택가 골목의 작은 카페</title>
+<style>
+/* Pretendard Variable — 유일한 브랜드 글꼴. 대체 금지.
+   NOTE: 로컬 폰트 바이너리를 제공받지 못해 공개 CDN(jsDelivr)의 woff2를 참조한다.
+   폰트 파일을 전달받으면 src를 로컬 경로로 교체할 것. */
+@font-face{font-family:"Pretendard Variable";font-weight:45 920;font-style:normal;font-display:swap;src:url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/woff2/PretendardVariable.woff2") format("woff2-variations")}
+
+:root{
+--blue-600:#0050A8;--blue-800:#003C7E;--blue-50:#E8F0F9;
+--paper:#FBF9F5;--white:#FFFFFF;--paper-warm:#F5F1EA;
+--ink-900:#2A2622;--ink-500:#6B655D;--ink-line:#E4DFD6;--caramel-600:#B8722C;
+--primary:var(--blue-600);--primary-dark:var(--blue-800);--primary-tint:var(--blue-50);
+--background:var(--paper);--surface:var(--white);--surface-warm:var(--paper-warm);
+--ink:var(--ink-900);--ink-muted:var(--ink-500);--ink-inverse:var(--paper);
+--line:var(--ink-line);--accent:var(--caramel-600);
+--scrim:rgba(42,38,34,0.55);
+
+--font-sans:"Pretendard Variable",Pretendard,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+--weight-regular:400;--weight-medium:500;--weight-semibold:600;
+--text-display:40px;--text-title:32px;--text-section:24px;--text-subtitle:20px;
+--text-body:16px;--text-body-sm:14px;--text-caption:13px;--text-number:16px;
+--tracking-display:-0.02em;--tracking-title:-0.015em;--tracking-section:-0.01em;--tracking-normal:0;
+--leading-display:1.25;--leading-title:1.3;--leading-section:1.35;--leading-subtitle:1.4;
+--leading-body:1.7;--leading-body-sm:1.6;--leading-caption:1.5;--leading-number:1.4;
+--measure:34ch;
+
+--space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-6:24px;
+--space-8:32px;--space-12:48px;--space-16:64px;--space-24:96px;
+--heading-gap:16px;--card-padding:24px;
+--container:1120px;--gutter:32px;--gutter-m:20px;--gutter-tablet:24px;
+--control-height:48px;--control-height-m:52px;--control-padding-x:24px;--touch-min:44px;
+
+--radius-control:8px;--radius-card:12px;--radius-flat:0px;
+--border-width:1px;
+--shadow-subtle:0 1px 2px rgba(42,38,34,0.06);
+--transition:160ms ease-out;
+}
+
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--background);color:var(--ink);font-family:var(--font-sans);font-size:var(--text-body);line-height:var(--leading-body);font-weight:var(--weight-regular);-webkit-font-smoothing:antialiased}
+*,*::before,*::after{box-sizing:border-box}
+a{color:var(--primary);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+a:hover{color:var(--primary-dark)}
+h1,h2,h3,h4,p{margin:0}
+button,input,select,textarea{font:inherit;color:inherit}
+img{max-width:100%;display:block}
+.hm-tabular{font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+.hm-container{max-width:var(--container);margin:0 auto;padding-inline:var(--gutter-m)}
+@media (min-width:768px){.hm-container{padding-inline:var(--gutter-tablet)}}
+@media (min-width:1120px){.hm-container{padding-inline:var(--gutter)}}
+
+/* layout helpers */
+.hm-section{padding-block:var(--space-24)}
+.hm-surface-warm{background:var(--surface-warm)}
+.hm-grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:var(--space-8)}
+.hm-grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:var(--space-6)}
+.hm-photo{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:12px}
+
+/* Button */
+.hm-btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-2);font-family:var(--font-sans);font-size:var(--text-body);font-weight:var(--weight-semibold);line-height:1;border-radius:var(--radius-control);padding-inline:var(--control-padding-x);cursor:pointer;text-decoration:none;transition:background-color var(--transition),color var(--transition),border-color var(--transition);box-sizing:border-box;height:var(--control-height);min-height:var(--touch-min);border:none;white-space:nowrap}
+.hm-btn-primary{background:var(--primary);color:#fff}
+.hm-btn-primary:hover{background:var(--primary-dark)}
+.hm-btn-secondary{background:transparent;color:var(--primary);border:var(--border-width) solid var(--primary)}
+.hm-btn-secondary:hover{background:var(--primary-tint)}
+.hm-btn-text{background:transparent;color:var(--primary);border:none;padding-inline:0;text-decoration:underline;text-underline-offset:3px;height:44px}
+.hm-btn-text:hover{color:var(--primary-dark)}
+.hm-btn-full{width:100%}
+.hm-btn-sm{height:40px;font-size:var(--text-body-sm);padding-inline:var(--space-4)}
+
+/* Card / NoticeBox */
+.hm-card{background:var(--surface);border:var(--border-width) solid var(--line);border-radius:var(--radius-card);padding:var(--card-padding)}
+.hm-notice{background:var(--primary-tint);border-radius:var(--radius-card);padding:var(--card-padding)}
+.hm-notice-title{font-size:var(--text-body);font-weight:var(--weight-semibold);color:var(--primary-dark);line-height:var(--leading-subtitle)}
+.hm-notice-body{margin-top:var(--space-2);font-size:var(--text-body-sm);line-height:var(--leading-body-sm);color:var(--ink);max-width:var(--measure)}
+.hm-notice-body:first-child{margin-top:0}
+
+/* SectionHeading */
+.hm-h-title{font-size:var(--text-title);letter-spacing:var(--tracking-title);line-height:var(--leading-title);font-weight:var(--weight-semibold);color:var(--ink);max-width:var(--measure)}
+.hm-h-section{font-size:var(--text-section);letter-spacing:var(--tracking-section);line-height:var(--leading-section);font-weight:var(--weight-semibold);color:var(--ink);max-width:var(--measure)}
+.hm-h-desc{margin-top:var(--heading-gap);font-size:var(--text-body);line-height:var(--leading-body);color:var(--ink-muted);max-width:var(--measure)}
+
+/* InfoTable */
+.hm-info-table{width:100%;border-collapse:collapse;font-size:var(--text-body)}
+.hm-info-table tr{border-bottom:var(--border-width) solid var(--line)}
+.hm-info-table th{text-align:left;vertical-align:top;padding:var(--space-3) 0;font-weight:var(--weight-regular);color:var(--ink-muted);width:33%;white-space:nowrap}
+.hm-info-table td{padding:var(--space-3) 0;color:var(--ink)}
+
+/* Form */
+.hm-field{display:flex;flex-direction:column;gap:var(--space-2)}
+.hm-field>label{font-size:var(--text-body-sm);font-weight:var(--weight-medium);color:var(--ink);line-height:var(--leading-body-sm)}
+.hm-hint{font-size:var(--text-body-sm);line-height:var(--leading-body-sm);color:var(--ink-muted)}
+.hm-input,.hm-select,.hm-textarea{width:100%;height:var(--control-height);min-height:var(--touch-min);padding:0 var(--space-4);background:var(--surface);color:var(--ink);font-size:var(--text-body);border:var(--border-width) solid var(--line);border-radius:var(--radius-control);outline:none;box-sizing:border-box;font-family:var(--font-sans)}
+.hm-input:focus,.hm-select:focus,.hm-textarea:focus{border-color:var(--primary);box-shadow:inset 0 0 0 1px var(--primary)}
+.hm-textarea{height:auto;padding:var(--space-3) var(--space-4);resize:vertical}
+.hm-checkbox-label,.hm-radio-label{display:inline-flex;align-items:center;gap:var(--space-3);min-height:var(--touch-min);cursor:pointer;font-size:var(--text-body)}
+.hm-checkbox-label input[type=checkbox]{appearance:none;width:20px;height:20px;margin:0;flex:0 0 auto;border:var(--border-width) solid var(--line);background:var(--surface);border-radius:4px;cursor:pointer}
+.hm-checkbox-label input[type=checkbox]:checked{border-color:var(--primary);background:var(--primary)}
+.hm-radio-label input[type=radio]{appearance:none;width:20px;height:20px;margin:0;flex:0 0 auto;border-radius:50%;border:var(--border-width) solid var(--line);background:var(--surface);cursor:pointer}
+.hm-radio-label input[type=radio]:checked{border:6px solid var(--primary)}
+
+/* SiteHeader / SiteFooter */
+.hm-header{background:var(--background);border-bottom:var(--border-width) solid var(--line)}
+.hm-header-inner{max-width:var(--container);margin:0 auto;padding:0 var(--gutter-m);height:64px;display:flex;align-items:center;justify-content:space-between;gap:var(--space-6)}
+.hm-brand{font-size:var(--text-subtitle);font-weight:var(--weight-semibold);letter-spacing:var(--tracking-section);color:var(--ink);text-decoration:none}
+.hm-nav{display:flex;align-items:center;gap:var(--space-6);flex-wrap:wrap}
+.hm-nav-link{font-size:var(--text-body-sm);color:var(--ink-muted);text-decoration:none;min-height:var(--touch-min);display:inline-flex;align-items:center;background:none;border:none;cursor:pointer;padding:0}
+.hm-nav-link.active{color:var(--primary);text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:1px}
+.hm-footer{background:var(--surface-warm);border-top:var(--border-width) solid var(--line);padding:var(--space-12) 0}
+.hm-footer-inner{max-width:var(--container);margin:0 auto;padding:0 var(--gutter-m);display:flex;flex-direction:column;gap:var(--space-4)}
+.hm-footer-brand{font-size:var(--text-subtitle);font-weight:var(--weight-semibold);color:var(--ink)}
+.hm-footer-addr{font-size:var(--text-body-sm);line-height:var(--leading-body-sm);color:var(--ink-muted)}
+.hm-footer-tel{font-size:var(--text-body-sm);color:var(--primary);width:fit-content;min-height:var(--touch-min);display:inline-flex;align-items:center}
+.hm-footer-row{font-size:var(--text-caption);line-height:var(--leading-caption);color:var(--ink-muted)}
+
+/* Tabs */
+.hm-screen{display:none}
+.hm-screen.active{display:block}
+</style>
+</head>
+<body>
+
+<div style="background:var(--background);min-height:100vh;display:flex;flex-direction:column">
+
+  <header class="hm-header">
+    <div class="hm-header-inner">
+      <span class="hm-brand">한모금</span>
+      <nav class="hm-nav" id="hm-nav">
+        <button class="hm-nav-link" data-nav="home">소개</button>
+        <button class="hm-nav-link" data-nav="menu">메뉴</button>
+        <button class="hm-nav-link" data-nav="class">원데이 클래스</button>
+        <button class="hm-nav-link" data-nav="visit">찾아오는 길</button>
+        <button class="hm-nav-link" data-nav="contact">자리 문의</button>
+        <a class="hm-btn hm-btn-secondary hm-btn-sm" href="tel:031-000-1234">전화</a>
+      </nav>
+    </div>
+  </header>
+
+  <main style="flex:1 1 auto">
+
+    <!-- HOME -->
+    <section class="hm-screen active" data-screen="home">
+      <div class="hm-surface-warm">
+        <div class="hm-container hm-section">
+          <div class="hm-grid-2">
+            <div>
+              <p style="font-size:var(--text-display);line-height:var(--leading-display);font-weight:var(--weight-semibold);letter-spacing:var(--tracking-display)">조용히 한 잔 하고 가세요</p>
+              <p class="hm-h-desc">성남 주택가 골목에 있는 작은 카페입니다. 혼자 오셔도 편하도록 자리를 넓게 두었습니다.</p>
+              <div style="margin-top:var(--space-8);display:flex;flex-wrap:wrap;gap:var(--space-3)">
+                <button class="hm-btn hm-btn-primary" data-nav="menu">메뉴 보기</button>
+                <button class="hm-btn hm-btn-secondary" data-nav="visit">찾아오는 길</button>
+              </div>
+            </div>
+            <img class="hm-photo" src="assets/images/store_front.jpg" alt="한모금 매장 전경">
+          </div>
+        </div>
+      </div>
+
+      <div class="hm-container hm-section">
+        <div class="hm-h-section">이곳은 이런 곳입니다</div>
+        <p class="hm-h-desc">필요한 정보만 적어 두었습니다.</p>
+        <div class="hm-grid-3" style="margin-top:var(--space-8)">
+          <div class="hm-card">
+            <h3 style="font-size:var(--text-subtitle);font-weight:var(--weight-medium);line-height:var(--leading-subtitle)">혼자 오기 좋은 자리</h3>
+            <p style="margin-top:var(--heading-gap);font-size:var(--text-body-sm);line-height:var(--leading-body-sm);color:var(--ink-muted)">1인석과 창가 자리가 있습니다.</p>
+          </div>
+          <div class="hm-card">
+            <h3 style="font-size:var(--text-subtitle);font-weight:var(--weight-medium);line-height:var(--leading-subtitle)">오래 머무르셔도 됩니다</h3>
+            <p style="margin-top:var(--heading-gap);font-size:var(--text-body-sm);line-height:var(--leading-body-sm);color:var(--ink-muted)">콘센트와 와이파이가 있습니다.</p>
+          </div>
+          <div class="hm-card">
+            <h3 style="font-size:var(--text-subtitle);font-weight:var(--weight-medium);line-height:var(--leading-subtitle)">조용한 편입니다</h3>
+            <p style="margin-top:var(--heading-gap);font-size:var(--text-body-sm);line-height:var(--leading-body-sm);color:var(--ink-muted)">음악은 낮게 틀어 둡니다.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hm-surface-warm">
+        <div class="hm-container hm-section">
+          <div class="hm-grid-2">
+            <div>
+              <h2 style="font-size:var(--text-section);line-height:var(--leading-section);font-weight:var(--weight-semibold);letter-spacing:var(--tracking-section)">영업시간</h2>
+              <div style="margin-top:var(--heading-gap)">
+                <table class="hm-info-table"><tbody>
+                  <tr><th scope="row">주소</th><td>경기도 성남시 남한산성로 144 1층</td></tr>
+                  <tr><th scope="row">전화</th><td>031-000-1234</td></tr>
+                  <tr><th scope="row">영업시간</th><td>08:00 - 22:00</td></tr>
+                  <tr><th scope="row">휴무</th><td>매주 수요일</td></tr>
+                </tbody></table>
+              </div>
+              <div style="margin-top:var(--space-6)">
+                <button class="hm-btn hm-btn-text" data-nav="contact">자리 문의하기</button>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:var(--space-4)">
+              <img class="hm-photo" src="assets/images/store_interior_1.jpg" alt="매장 내부">
+              <img class="hm-photo" src="assets/images/store_interior_2.jpg" alt="매장 내부">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MENU -->
+    <section class="hm-screen" data-screen="menu">
+      <div class="hm-container hm-section">
+        <div class="hm-h-title">메뉴</div>
+        <p class="hm-h-desc">가격은 부가세를 포함한 금액입니다.</p>
+        <div style="margin-top:var(--space-8);max-width:640px;display:flex;flex-direction:column">
+          <div style="display:flex;align-items:center;gap:var(--space-4);padding-block:var(--space-4);border-bottom:1px solid var(--line)">
+            <div style="width:168px;height:168px;flex-shrink:0;border-radius:12px;overflow:hidden"><img src="assets/images/menu_americano.jpg" alt="아메리카노" style="width:100%;height:100%;object-fit:cover"></div>
+            <h3 style="flex:1 1 auto;font-size:var(--text-body);font-weight:var(--weight-medium)">아메리카노</h3>
+            <span class="hm-tabular" style="font-size:var(--text-body);color:var(--ink-muted)">4,000원</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:var(--space-4);padding-block:var(--space-4);border-bottom:1px solid var(--line)">
+            <div style="width:168px;height:168px;flex-shrink:0;border-radius:12px;overflow:hidden"><img src="assets/images/menu_latte.jpg" alt="카페라떼" style="width:100%;height:100%;object-fit:cover"></div>
+            <h3 style="flex:1 1 auto;font-size:var(--text-body);font-weight:var(--weight-medium)">카페라떼</h3>
+            <span class="hm-tabular" style="font-size:var(--text-body);color:var(--ink-muted)">4,500원</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:var(--space-4);padding-block:var(--space-4);border-bottom:1px solid var(--line)">
+            <div style="width:168px;height:168px;flex-shrink:0;border-radius:12px;overflow:hidden"><img src="assets/images/menu_black_latte.jpg" alt="흑임자라떼" style="width:100%;height:100%;object-fit:cover"></div>
+            <h3 style="flex:1 1 auto;font-size:var(--text-body);font-weight:var(--weight-medium)">흑임자라떼</h3>
+            <span class="hm-tabular" style="font-size:var(--text-body);color:var(--ink-muted)">5,500원</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:var(--space-4);padding-block:var(--space-4);border-bottom:1px solid var(--line)">
+            <div style="width:168px;height:168px;flex-shrink:0;border-radius:12px;overflow:hidden"><img src="assets/images/menu_einspanner.jpg" alt="아인슈페너" style="width:100%;height:100%;object-fit:cover"></div>
+            <h3 style="flex:1 1 auto;font-size:var(--text-body);font-weight:var(--weight-medium)">아인슈페너</h3>
+            <span class="hm-tabular" style="font-size:var(--text-body);color:var(--ink-muted)">5,500원</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:var(--space-4);padding-block:var(--space-4);border-bottom:none">
+            <div style="width:168px;height:168px;flex-shrink:0;border-radius:12px;overflow:hidden"><img src="assets/images/menu_grapefruit.jpg" alt="자몽에이드" style="width:100%;height:100%;object-fit:cover"></div>
+            <h3 style="flex:1 1 auto;font-size:var(--text-body);font-weight:var(--weight-medium)">자몽에이드</h3>
+            <span class="hm-tabular" style="font-size:var(--text-body);color:var(--ink-muted)">5,500원</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CLASS -->
+    <section class="hm-screen" data-screen="class">
+      <div class="hm-container hm-section">
+        <p style="font-size:var(--text-caption);color:var(--ink-muted)">홈 &gt; 원데이 클래스</p>
+        <div class="hm-grid-2" style="margin-top:var(--space-6);align-items:start">
+          <img src="assets/images/class_banner.jpg" alt="라떼아트 원데이 클래스" style="width:100%;aspect-ratio:1024/324;object-fit:cover;border-radius:12px">
+          <div>
+            <h1 style="font-size:var(--text-title);line-height:var(--leading-title);font-weight:var(--weight-semibold);letter-spacing:var(--tracking-title)">라떼아트 원데이 클래스</h1>
+            <p style="margin-top:var(--space-2)" class="hm-tabular"><span style="font-size:var(--text-title);color:var(--accent);font-weight:var(--weight-medium)">55,000원</span></p>
+            <p class="hm-h-desc" style="margin-top:var(--space-4)">라떼아트를 처음부터 배워보는 클래스입니다.</p>
+            <div style="margin-top:var(--space-6)">
+              <table class="hm-info-table"><tbody>
+                <tr><th scope="row">인원</th><td>4명</td></tr>
+                <tr><th scope="row">준비물</th><td>없음</td></tr>
+                <tr><th scope="row">소요 시간</th><td>2시간</td></tr>
+              </tbody></table>
+            </div>
+            <div style="margin-top:var(--space-8)">
+              <button class="hm-btn hm-btn-primary" data-nav="contact">문의로 신청하기</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VISIT -->
+    <section class="hm-screen" data-screen="visit">
+      <div class="hm-container hm-section">
+        <div class="hm-h-title">찾아오는 길</div>
+        <p class="hm-h-desc">주택가 골목에 있습니다. 간판이 작으니 천천히 찾아 주세요.</p>
+        <div class="hm-grid-2" style="margin-top:var(--space-12);align-items:start">
+          <div>
+            <table class="hm-info-table"><tbody>
+              <tr><th scope="row">주소</th><td>경기도 성남시 남한산성로 144 1층</td></tr>
+              <tr><th scope="row">전화</th><td>031-000-1234</td></tr>
+              <tr><th scope="row">영업시간</th><td>08:00 - 22:00</td></tr>
+              <tr><th scope="row">휴무</th><td>매주 수요일</td></tr>
+            </tbody></table>
+            <p style="margin-top:var(--space-6);font-size:var(--text-body-sm);line-height:var(--leading-body-sm);color:var(--ink-muted)">8호선 남한산성입구역 2번 출구에서 30m</p>
+            <div style="margin-top:var(--space-8)">
+              <a class="hm-btn hm-btn-primary" href="tel:031-000-1234">전화로 문의하기</a>
+            </div>
+            <div class="hm-notice" style="margin-top:var(--space-8)">
+              <p class="hm-notice-title">주차</p>
+              <p class="hm-notice-body">주차 정보는 확인 후 채웁니다.</p>
+            </div>
+          </div>
+          <div class="hm-card">
+            <img class="hm-photo" src="assets/images/visit_map.jpg" alt="찾아오는 길 지도">
+            <div style="margin-top:var(--space-4)">
+              <a class="hm-btn hm-btn-text" href="https://map.naver.com/p/search/%EA%B2%BD%EA%B8%B0%EB%8F%84%20%EC%84%B1%EB%82%A8%EC%8B%9C%20%EB%82%A8%ED%95%9C%EC%82%B0%EC%84%B1%EB%A1%9C%20144" target="_blank" rel="noreferrer">네이버 지도에서 보기</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="hm-screen" data-screen="contact">
+      <div class="hm-container hm-section">
+
+        <div id="hm-contact-sent" style="display:none;max-width:640px">
+          <div class="hm-h-title">문의를 받았습니다</div>
+          <p class="hm-h-desc">확인 후 문자로 답을 드립니다.</p>
+          <div style="margin-top:var(--space-8)">
+            <button class="hm-btn hm-btn-secondary" id="hm-reset-form">다시 작성하기</button>
+          </div>
+        </div>
+
+        <div id="hm-contact-form" style="max-width:640px">
+          <div class="hm-h-title">자리 문의</div>
+          <p class="hm-h-desc">예약은 받지 않습니다. 단체 방문만 미리 알려 주세요.</p>
+          <div class="hm-notice" style="margin-top:var(--space-8)">
+            <p class="hm-notice-body">4명 이상 오실 때만 남겨 주세요.</p>
+          </div>
+
+          <form id="hm-form" class="hm-card" style="margin-top:var(--space-6);display:flex;flex-direction:column;gap:var(--space-6)">
+            <div class="hm-field">
+              <label for="name">이름</label>
+              <input class="hm-input" id="name" placeholder="이름">
+            </div>
+            <div class="hm-field">
+              <label for="tel">연락처</label>
+              <input class="hm-input" id="tel" inputmode="tel" placeholder="010-0000-0000">
+              <p class="hm-hint">확인 문자를 보냅니다.</p>
+            </div>
+            <div class="hm-field">
+              <label for="size">인원</label>
+              <select class="hm-select" id="size">
+                <option value="4">4명</option>
+                <option value="5">5명</option>
+                <option value="6">6명 이상</option>
+              </select>
+            </div>
+            <div class="hm-field">
+              <label>희망 시간</label>
+              <div style="display:flex;flex-wrap:wrap;gap:var(--space-6)">
+                <label class="hm-radio-label"><input type="radio" name="time" value="14" checked> 14:00</label>
+                <label class="hm-radio-label"><input type="radio" name="time" value="16"> 16:00</label>
+                <label class="hm-radio-label"><input type="radio" name="time" value="18"> 18:00</label>
+              </div>
+            </div>
+            <div class="hm-field">
+              <label for="msg">남기실 말씀</label>
+              <textarea class="hm-textarea" id="msg" rows="3" placeholder="한 문장으로 적어 주세요."></textarea>
+            </div>
+            <label class="hm-checkbox-label"><input type="checkbox" id="agree" checked> 문자 안내를 받겠습니다.</label>
+            <button type="submit" class="hm-btn hm-btn-primary hm-btn-full">문의 보내기</button>
+          </form>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="hm-footer">
+    <div class="hm-footer-inner">
+      <span class="hm-footer-brand">한모금</span>
+      <p class="hm-footer-addr">경기도 성남시 남한산성로 144 1층</p>
+      <a class="hm-footer-tel" href="tel:031-000-1234">031-000-1234</a>
+      <p class="hm-footer-row">매주 수요일 휴무</p>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var navLinks = document.querySelectorAll('[data-nav]');
+  var screens = document.querySelectorAll('.hm-screen');
+  var navButtons = document.querySelectorAll('.hm-nav-link');
+
+  function showTab(tab){
+    screens.forEach(function(s){ s.classList.toggle('active', s.dataset.screen === tab); });
+    navButtons.forEach(function(b){ b.classList.toggle('active', b.dataset.nav === tab); });
+    window.scrollTo({top:0, behavior:'instant' in window ? 'instant' : 'auto'});
+  }
+
+  navLinks.forEach(function(el){
+    el.addEventListener('click', function(e){
+      e.preventDefault();
+      showTab(el.dataset.nav);
+    });
+  });
+
+  showTab('home');
+
+  var form = document.getElementById('hm-form');
+  var formWrap = document.getElementById('hm-contact-form');
+  var sentWrap = document.getElementById('hm-contact-sent');
+  var resetBtn = document.getElementById('hm-reset-form');
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    formWrap.style.display = 'none';
+    sentWrap.style.display = 'block';
+  });
+
+  resetBtn.addEventListener('click', function(){
+    sentWrap.style.display = 'none';
+    formWrap.style.display = 'block';
+    form.reset();
+  });
+})();
+</script>
+
+</body>
+</html>
